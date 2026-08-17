@@ -1,0 +1,51 @@
+Here's the complete, final prompt — ready to paste into Cursor along with your reference UI screenshot:
+
+---
+
+**Project: Restora — AI-Verified Waste Cleanup & Rewards App**
+
+Build a full-stack web app for a hackathon (prompt: "Build technology that helps people reconnect with nature or supports environmental health"), judged on Impact & problem fit (25%), Technical execution (25%), Usability/design/accessibility (20%), Creativity & originality (15%).
+
+**Core concept:** Restora lets users report and verify litter/waste cleanups in their community. AI verifies the cleanup from before/after photos, users earn points, and a live map + impact dashboard shows collective community impact. Localized to Ghana — framed around a real problem such as Agbogbloshie e-waste burning or plastic choking the Korle Lagoon (flooding risk).
+
+**Tech stack:**
+- Next.js + TypeScript (App Router)
+- Supabase (auth via Google OAuth, Postgres DB, storage for photos)
+- Claude API (Anthropic) for AI photo verification and waste classification
+- Tailwind CSS for styling
+- Mapbox or Leaflet for the map/heatmap view
+- Web Speech API for voice-guided reporting (with Twi-language toggle if feasible)
+
+**UI Design:**
+A reference UI screenshot is attached. Clone its layout, spacing, color palette, typography, and component style as closely as possible for Restora's design system. Treat the attached image as the source of truth for visual design — do not fall back to a generic template or default Tailwind look.
+
+**Imagery:**
+Do not use placeholder/stock graphics or generic icon packs anywhere on the site. Fetch real HD images from the web that resonate with each section's content:
+- Hero section → real photo of community cleanup or nature reconnection (Ghana coastal/community cleanup, lush greenery)
+- Problem/impact section → real photo grounding the localized problem (Agbogbloshie e-waste burning, Korle Lagoon plastic pollution)
+- How-it-works/features section → relevant real photos per step (someone photographing litter, a cleaned-up area, a community map)
+- Impact dashboard → data-driven/illustrative visuals rather than photographic
+
+Source images via the Unsplash API or Pexels API at build time, querying keywords matched to each section's theme, and pull the highest-resolution version available. If API access isn't available, fall back to a small curated set of downloaded HD images — never generic icons or low-res stock art. Ensure all images are properly licensed under Unsplash/Pexels terms and attribute where required.
+
+**Core user flow (MVP — must work flawlessly for the live demo):**
+1. **Auth** — Google OAuth sign-in via Supabase
+2. **Report a cleanup** — user uploads a "before" photo (litter/waste) and an "after" photo (cleaned area), tags GPS location (auto-captured or manual pin on map), optional voice note description (transcribed via Web Speech API)
+3. **AI verification** — send the before/after photo pair to the Claude API with a prompt asking it to: (a) confirm the after photo shows a cleaned version of the same location, (b) roughly classify waste type (plastic, organic, e-waste, etc.), (c) estimate quantity/severity. Return structured JSON.
+4. **Points ledger** — on verification success, award points in a Supabase `rewards` table (simple ledger, no blockchain). Include basic duplicate-detection (image hash or location+timeframe check) to prevent gaming the system.
+5. **Map view** — show all verified cleanup reports as pins/heatmap (Mapbox/Leaflet), filterable by area or waste type
+6. **Impact dashboard** — aggregate stats: total reports, estimated kg collected, top contributors, and a simple CO2-equivalent or "trees planted equivalent" conversion for storytelling
+7. **Accessibility** — voice-guided reporting flow, mobile-first responsive design, high-contrast/legible UI
+
+**Data model (Supabase tables):**
+- `users` (from Supabase auth)
+- `reports` (id, user_id, before_photo_url, after_photo_url, lat, lng, description, voice_transcript, ai_classification jsonb, verification_status, waste_type, estimated_quantity, created_at)
+- `rewards` (id, user_id, report_id, points, created_at)
+
+**Cut from scope (do not build unless time remains):** on-chain tokens, Chainlink price feeds, DAO-style community voting, Web3Auth.
+
+**Deliverable priorities in order:** (1) working AI verification pipeline end-to-end, (2) clean map + dashboard visualization, (3) voice reporting flow, (4) polish/mobile responsiveness. A smaller, reliable feature set beats a larger flaky one in the live demo.
+
+---
+
+Attach your reference screenshot in Cursor alongside this prompt and you're ready to go. Want the Unsplash/Pexels fetch function written out as actual starter code next, so Cursor has something concrete to build from?

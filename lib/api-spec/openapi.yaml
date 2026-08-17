@@ -1,0 +1,120 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: waste
+    description: Waste image analysis
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /analyze-waste:
+    post:
+      operationId: analyzeWaste
+      tags: [waste]
+      summary: Analyze a waste image
+      description: Uses Gemini to classify visible waste and estimate its quantity and weight.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WasteAnalysisInput"
+      responses:
+        "200":
+          description: Waste analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WasteAnalysis"
+        "400":
+          description: Invalid image input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "502":
+          description: AI analysis failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    WasteAnalysisInput:
+      type: object
+      properties:
+        imageBase64:
+          type: string
+          minLength: 32
+          maxLength: 12000000
+          description: Base64-encoded image bytes without a data URL prefix.
+        mimeType:
+          type: string
+          enum: [image/jpeg, image/png, image/webp, image/gif]
+      required:
+        - imageBase64
+        - mimeType
+    WasteAnalysis:
+      type: object
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+          enum: [Plastic, Organic, E-waste, Mixed]
+        estimatedQuantity:
+          type: string
+        estimatedWeightKg:
+          type: number
+          minimum: 0
+        confidence:
+          type: number
+          multipleOf: 1
+          minimum: 0
+          maximum: 100
+        explanation:
+          type: string
+        impact:
+          type: string
+      required:
+        - title
+        - category
+        - estimatedQuantity
+        - estimatedWeightKg
+        - confidence
+        - explanation
+        - impact
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
