@@ -115,7 +115,7 @@ function Shell({ children }: { children: ReactNode }) {
     <aside className="restora-sidebar">
       <Link href="/" className="flex items-center gap-3 px-3 mb-12" data-testid="link-brand">
         <span className="brand-mark"><Leaf size={19} /></span>
-         <span><span className="brand-word block text-lg">Zero2Hero</span><span className="text-[10px] tracking-[.16em] uppercase opacity-45">Waste management</span></span>
+        <span><span className="brand-word block text-lg">Restora</span><span className="text-[10px] tracking-[.16em] uppercase opacity-45">Waste management</span></span>
       </Link>
       <div className="px-3 mb-3 text-[10px] font-bold uppercase tracking-[.15em] opacity-40">Workspace</div>
       <nav className="grid gap-1">
@@ -174,7 +174,7 @@ function HomePage() {
     <section className="welcome-home">
       <div className="welcome-emblem"><Leaf size={58} strokeWidth={1.55} /></div>
       <div className="page-eyebrow">A cleaner way to take action</div>
-      <h1 className="welcome-title"><span>Zero-to-Hero</span> Waste Management</h1>
+      <h1 className="welcome-title"><span>Restora</span> Waste Management</h1>
       <p className="welcome-copy">Upload a photo of waste, make the change visible, and keep your community moving toward cleaner shared spaces.</p>
       <Link href="/report" className="button button-primary welcome-cta" data-testid="button-start-report"><Plus size={16} /> Get started <ArrowRight size={15} /></Link>
     </section>
