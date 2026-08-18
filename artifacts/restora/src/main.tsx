@@ -4,7 +4,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { setBaseUrl } from '../../../lib/api-client-react/src';
 import './index.css';
 
-setBaseUrl('http://localhost:8080');
+setBaseUrl('https://restora-app-urja.onrender.com');
 
 createRoot(document.getElementById('root')!, {
   // Keeps caught errors off reportError(), which would raise the dev overlay.
