@@ -1,25 +1,36 @@
 cat > README.md << 'EOF'
 # Restora
 
-AI-verified community waste cleanup and rewards platform — built to help people reconnect with nature and support environmental health.
+**AI-verified community waste cleanup and rewards platform** — helping people reconnect with nature and take direct action on environmental health.
 
- 🔗 **Live site:** https://restora-app-1.onrender.com
- 
+🔗 **Live site:** https://restora-app-1.onrender.com
+ **Repo:** https://github.com/mendselvis/restora-app
+
+![Restora home page](docs/screenshots/home.png)
+
 ## What it does
 
-Restora lets users report litter or waste hotspots in their community, then submit before-and-after photos once the area is cleaned. AI-powered image verification (via the Gemini API) confirms the cleanup actually happened, classifies the waste type, and estimates quantity — so every report is real and accountable, not just self-reported.
+Restora lets users report litter or waste hotspots in their community, then submit a photo once the area is documented. AI-powered image verification — via the Gemini API — analyzes the photo, classifies the waste type, estimates quantity and weight, and explains its reasoning. Every report is real and accountable, not just self-reported.
 
-Verified cleanups earn users points on a transparent rewards ledger. A live map visualizes cleanup activity and waste hotspots across the community, and an impact dashboard shows the bigger picture: total waste collected, active contributors, and estimated environmental impact.
+Verified cleanups earn users points on a transparent rewards ledger. Restora is localized to real environmental challenges facing Ghana, including e-waste burning at Agbogbloshie and plastic pollution choking the Korle Lagoon.
 
-Restora is localized to real environmental challenges facing Ghana, such as e-waste burning at Agbogbloshie and plastic pollution choking the Korle Lagoon.
+## How it works
+
+| Upload a photo | AI analyzes it | Earn rewards |
+|---|---|---|
+| ![Upload waste photo](docs/screenshots/report-upload.png) | ![AI analysis result](docs/screenshots/ai-result.png) | ![Rewards dashboard](docs/screenshots/rewards.png) |
+
+1. **Report** — upload a photo of waste at a location
+2. **Verify** — Gemini analyzes the image: classification, estimated quantity and weight, confidence score, and a plain-language explanation of what it found
+3. **Reward** — verified reports earn points on a transparent community ledger
 
 ## Key features
 
-- **AI-powered verification** — Gemini-based image analysis confirms genuine before/after cleanups and classifies waste type and quantity
-- **Transparent rewards** — points-based ledger for verified environmental action
+- **AI-powered verification** — Gemini-based image analysis classifies waste type, estimates quantity and weight, and explains its reasoning before anything is published
+-  **Transparent rewards** — points-based ledger for verified environmental action, redeemable locally
 - **Community impact map** — live visualization of cleanup activity and waste hotspots
-- **Impact dashboard** — real-time community stats on waste collected and contributors
-- **Accessible by design** — voice-guided reporting flow for inclusive participation
+-  **Impact dashboard** — real-time community stats on waste collected and contributors
+-  **Accessible by design** — built with a voice-guided reporting flow for inclusive participation
 
 ## Tech stack
 
@@ -27,37 +38,28 @@ Restora is localized to real environmental challenges facing Ghana, such as e-wa
 - **Backend:** Node.js, Express
 - **AI:** Google Gemini API for waste image verification
 - **Database/Auth:** Supabase
+- **Hosting:** Render (frontend + backend)
 
 ## Getting started
 
 This is a pnpm monorepo. From the repo root:
 
-\`\`\`bash
+```bash
 pnpm install
-\`\`\`
+```
 
 ### Run the frontend
 
-\`\`\`bash
+```bash
 cd artifacts/restora
 PORT=3000 BASE_PATH=/ pnpm dev
-\`\`\`
+```
 
 ### Run the backend
 
-\`\`\`bash
+```bash
 cd artifacts/api-server
 PORT=8080 pnpm dev
-\`\`\`
+```
 
 You'll need a `.env` file in `artifacts/api-server` with:
-
-\`\`\`
-GEMINI_API_KEY=your-gemini-api-key
-SESSION_SECRET=your-session-secret
-\`\`\`
-
-## Hackathon context
-
-Built for the prompt: *"Build technology that helps people reconnect with nature or supports environmental health."*
-EOF
