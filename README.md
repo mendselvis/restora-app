@@ -3,6 +3,8 @@ cat > README.md << 'EOF'
 
 AI-verified community waste cleanup and rewards platform — built to help people reconnect with nature and support environmental health.
 
+ 🔗 **Live site:** https://restora-app-1.onrender.com
+ 
 ## What it does
 
 Restora lets users report litter or waste hotspots in their community, then submit before-and-after photos once the area is cleaned. AI-powered image verification (via the Gemini API) confirms the cleanup actually happened, classifies the waste type, and estimates quantity — so every report is real and accountable, not just self-reported.
